@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkyAPI.DTOS;
 
@@ -8,6 +9,7 @@ namespace ParkyAPI.Controllers
     //[Route("api/[controller]")]
     //[ApiExplorerSettings(GroupName = "NationalParks")]
     [ApiController]
+    [Authorize(Roles ="Admin")]
     public class NationalParkController : ControllerBase
     {
         private readonly INationalParkRepo _nationalParkRepo;
@@ -21,6 +23,7 @@ namespace ParkyAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(200, Type = typeof(List<NationalParkDto>))]
         public async Task<ActionResult<List<NationalParkDto>>> GetNationalParks()
         {

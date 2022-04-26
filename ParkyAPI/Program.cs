@@ -1,6 +1,7 @@
 global using ParkyAPI.Models;
 global using ParkyAPI.Repos.NationalParkRepos;
 global using ParkyAPI.Repos.TrailRepos;
+global using ParkyAPI.Repos.UserRepos;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ParkyAPI.Data;
@@ -11,12 +12,16 @@ using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using ParkyAPI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors();
 // Add AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton(provider => new MapperConfiguration(conf =>
@@ -28,6 +33,7 @@ builder.Services.AddSingleton(provider => new MapperConfiguration(conf =>
 // Repos
 builder.Services.AddScoped<INationalParkRepo,NationalParkRepo>();
 builder.Services.AddScoped<ITrailRepo, TrailRepo>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -103,8 +109,21 @@ builder.Services.AddSwaggerGen();
 //    options.IncludeXmlComments(cmlCommentsFullPath);
 //});
 #endregion
-
-
+// This will make our json web token work with authorization
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey =
+                new SymmetricSecurityKey(System.Text.Encoding.UTF8
+                .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 // create provider for API versioning
 var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
@@ -129,7 +148,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+// add middleware to make authorization work 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

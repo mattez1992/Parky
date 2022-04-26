@@ -86,5 +86,19 @@
             <param name="id">The Id of the trail</param>
             <returns></returns>
         </member>
+        <member name="M:ParkyAPI.Controllers.UsersController.Login(ParkyAPI.DTOS.LoginDro)">
+            <summary>
+            Authenticates a user.
+            </summary>
+            <param name="loginDro">Model for holding Login credentials</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.UsersController.Register(ParkyAPI.DTOS.LoginDro)">
+            <summary>
+            Registers a user and sends it back
+            </summary>
+            <param name="loginDro">Model for holding Creation credentials</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

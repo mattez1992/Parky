@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkyAPI.DTOS;
@@ -8,6 +9,7 @@ namespace ParkyAPI.Controllers
     [Route("api/v{version:apiVersion}/trails")]
     //[Route("api/[controller]")]
     //[ApiExplorerSettings(GroupName = "Trails")]
+    [Authorize]
     [ApiController]
     public class TrailController : ControllerBase
     {
@@ -24,6 +26,7 @@ namespace ParkyAPI.Controllers
        /// </summary>
        /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(200, Type = typeof(List<ReadTrailDto>))]
         public async Task<ActionResult<List<ReadTrailDto>>> GetTrails()
         {
