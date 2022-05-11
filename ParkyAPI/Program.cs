@@ -70,40 +70,40 @@ builder.Services.AddSwaggerGen();
 //            Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
 //        }
 //    });
-//    //options.SwaggerDoc("NationalParks", new OpenApiInfo
-//    //{
-//    //    Version = "v1",
-//    //    Title = "Parky API",
-//    //    Description = "An API for national parks in the us",
-//    //    TermsOfService = new Uri("https://example.com/terms"),
-//    //    Contact = new OpenApiContact
-//    //    {
-//    //        Name = "Mattias Akerstrom",
-//    //       Url = new Uri("https://github.com/mattez1992")
-//    //    },
-//    //    License = new OpenApiLicense
-//    //    {
-//    //        Name = "MIT License",
-//    //        Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
-//    //    }
-//    //});
-//    //options.SwaggerDoc("Trails", new OpenApiInfo
-//    //{
-//    //    Version = "v1",
-//    //    Title = "Parky API",
-//    //    Description = "An API for trails in national parks in the us",
-//    //    TermsOfService = new Uri("https://example.com/terms"),
-//    //    Contact = new OpenApiContact
-//    //    {
-//    //        Name = "Mattias Akerstrom",
-//    //        Url = new Uri("https://github.com/mattez1992")
-//    //    },
-//    //    License = new OpenApiLicense
-//    //    {
-//    //        Name = "MIT License",
-//    //        Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
-//    //    }
-//    //});
+//    options.SwaggerDoc("NationalParks", new OpenApiInfo
+//    {
+//        Version = "v1",
+//        Title = "Parky API",
+//        Description = "An API for national parks in the us",
+//        TermsOfService = new Uri("https://example.com/terms"),
+//        Contact = new OpenApiContact
+//        {
+//            Name = "Mattias Akerstrom",
+//            Url = new Uri("https://github.com/mattez1992")
+//        },
+//        License = new OpenApiLicense
+//        {
+//            Name = "MIT License",
+//            Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
+//        }
+//    });
+//    options.SwaggerDoc("Trails", new OpenApiInfo
+//    {
+//        Version = "v1",
+//        Title = "Parky API",
+//        Description = "An API for trails in national parks in the us",
+//        TermsOfService = new Uri("https://example.com/terms"),
+//        Contact = new OpenApiContact
+//        {
+//            Name = "Mattias Akerstrom",
+//            Url = new Uri("https://github.com/mattez1992")
+//        },
+//        License = new OpenApiLicense
+//        {
+//            Name = "MIT License",
+//            Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
+//        }
+//    });
 //    var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 //    var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
 //    options.IncludeXmlComments(cmlCommentsFullPath);
@@ -140,8 +140,8 @@ if (app.Environment.IsDevelopment())
     //app.UseSwaggerUI(options =>
     //{
     //    options.SwaggerEndpoint("/swagger/ParkyAPI/swagger.json", "Parky API");
-    //    //options.SwaggerEndpoint("/swagger/NationalParks/swagger.json", "Parky API");
-    //    //options.SwaggerEndpoint("/swagger/Trails/swagger.json", "Parky API TRail");
+    //    options.SwaggerEndpoint("/swagger/NationalParks/swagger.json", "Parky API");
+    //    options.SwaggerEndpoint("/swagger/Trails/swagger.json", "Parky API TRail");
     //});
     #endregion
 
